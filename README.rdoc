@@ -1,10 +1,8 @@
 = checklist
 
-* FIX (url)
-
 == DESCRIPTION:
 
-FIX (describe your package)
+A simple gem to provide a way of keeping track of today's to-do list.
 
 == FEATURES/PROBLEMS:
 
@@ -18,10 +16,6 @@ FIX (describe your package)
 
 * Sequel 2.8.0 or greater
 * SQLite
-
-== INSTALL:
-
-* FIX (sudo gem install, anything else)
 
 == LICENSE:
 
