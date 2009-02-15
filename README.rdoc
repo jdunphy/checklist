@@ -16,7 +16,8 @@ FIX (describe your package)
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* Sequel 2.8.0 or greater
+* SQLite
 
 == INSTALL:
 
