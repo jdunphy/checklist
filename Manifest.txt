@@ -1,16 +1,8 @@
 History.txt
-Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
 bin/checklist
 lib/checklist.rb
 lib/checklist/cli.rb
-script/console
-script/destroy
-script/generate
-spec/checklist_cli_spec.rb
-spec/checklist_spec.rb
-spec/spec.opts
-spec/spec_helper.rb
-tasks/rspec.rake
+lib/checklist/task.rb
