@@ -17,7 +17,7 @@ describe "Checklist::Task" do
       @task.task_for.should_not be_nil
       @task.task_for.should eql(Time.today)
     end
-
+  
     it "should require a name" do
       @task.should be_valid
       @task.name = nil
@@ -32,6 +32,23 @@ describe "Checklist::Task" do
     
     it "should not be done" do
       @task.should_not be_done
+    end
+    
+    it "should be completable" do
+      @task.complete!
+      @task.reload
+      @task.should be_done
+    end
+    
+    it "should be delayable" do
+      @task.task_for.should eql(Time.today)
+      @task.delay!
+      @task.reload
+      @task.task_for.should eql(Time.today + 60 * 60 * 24)
+    end
+    
+    after(:each) do
+      @task.destroy
     end
   end
 end
