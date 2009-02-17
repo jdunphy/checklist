@@ -5,6 +5,10 @@ module Checklist
     
     before_create :create_date
     
+    def_dataset_method(:today) do
+      filter(:task_for => Time.today)
+    end
+    
     def done?
       done == true
     end

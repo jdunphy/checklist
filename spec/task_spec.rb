@@ -51,4 +51,23 @@ describe "Checklist::Task" do
       @task.destroy
     end
   end
+  
+  describe "with two saved tasks" do
+    before(:each) do
+      Checklist::Task.delete_all
+      @task1 = Checklist::Task.create(:name => 'part1')
+      @task2 = Checklist::Task.create(:name => 'part2')
+    end
+    
+    it "#today should return two tasks" do
+      Checklist::Task.today.all.should include(@task1)
+      Checklist::Task.today.all.should include(@task2)
+    end
+    
+    it "#today should return tasks for tomorrow" do
+      @task2.delay!
+      Checklist::Task.today.all.should include(@task1)
+      Checklist::Task.today.all.should_not include(@task2)      
+    end
+  end
 end
