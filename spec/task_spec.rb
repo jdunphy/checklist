@@ -34,6 +34,11 @@ describe "Checklist::Task" do
       @task.should_not be_done
     end
     
+    it "should have a priority" do
+      @task.priority.should_not be_nil
+      @task.priority.should be_kind_of(Fixnum)
+    end
+    
     it "should be completable" do
       @task.complete!
       @task.reload
@@ -68,6 +73,16 @@ describe "Checklist::Task" do
       @task2.delay!
       Checklist::Task.today.all.should include(@task1)
       Checklist::Task.today.all.should_not include(@task2)      
+    end
+    
+    it "should be priority one and two" do
+      @task1.priority.should eql(1)
+      @task2.priority.should eql(2)
+    end
+    
+    it "should set priority to 3 for a new task" do
+      task3 = Checklist::Task.create(:name => 'part 3')
+      task3.priority.should eql(3)
     end
   end
 end

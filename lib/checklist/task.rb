@@ -4,9 +4,10 @@ module Checklist
     validates_presence_of :name
     
     before_create :create_date
+    before_create :set_priority
     
     def_dataset_method(:today) do
-      filter(:task_for => Time.today)
+      filter(:task_for => Time.today).order(:priority.asc)
     end
     
     def done?
@@ -22,8 +23,14 @@ module Checklist
     end
     
     private 
+    
       def create_date
         self.task_for = Date.today
+      end
+      
+      def set_priority
+        current_last= self.class.today.last
+        self.priority = current_last ? current_last.priority + 1 : 1
       end
   end
   

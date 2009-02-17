@@ -5,6 +5,7 @@ module Checklist
         primary_key :id
         varchar     :name
         boolean     :done, :default => false
+        integer     :priority
         datetime    :task_for
       end
     end
