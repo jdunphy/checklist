@@ -22,6 +22,16 @@ module Checklist
       update(:task_for => Date.today + 1)
     end
     
+    def update_priority(new_priority)
+      return if new_priority == priority
+      if new_priority > priority
+        self.class.today.filter('priority >= ? and priority < ?', priority, new_priority).update(:priority => :priority - 1)
+      else
+        self.class.today.filter('priority >= ? and priority < ?', new_priority, priority).update(:priority => :priority + 1)
+      end
+      update(:priority => new_priority)
+    end
+    
     private 
     
       def create_date

@@ -85,4 +85,29 @@ describe "Checklist::Task" do
       task3.priority.should eql(3)
     end
   end
+  
+  describe "with a bunch of tasks" do
+    before(:each) do
+      Checklist::Task.delete_all
+      1.upto(4) do |i|
+        Checklist::Task.create(:name => "#{i}")
+      end
+    end
+      
+    it "should reorder all tasks when priority is changed on one" do
+      task4 = Checklist::Task.today.last
+      task4.update_priority(1)
+      task4.priority.should eql(1)
+      Checklist::Task.today.map {|t| t.name }.should eql(['4','1','2','3'])
+      
+      task4.update_priority(3)
+      task4.priority.should eql(3)
+      Checklist::Task.today.map {|t| t.name }.should eql(['1','2','4','3'])
+      
+      task4.update_priority(4)
+      Checklist::Task.today.map {|t| t.name }.should eql(['1','2','3','4'])
+    end
+      
+      
+  end
 end
